@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import { Button, Grid, Modal } from '@mui/material';
 import RegistroTreino from '../components/RegistroTreino';
+import RelatorioTreino from '../components/RelatorioTreino';
 
 const Treinos = () => {
   const [open, setOpen] = useState(false);
@@ -17,6 +18,7 @@ const Treinos = () => {
       Adicionar Treino
     </Button>
   </Box>
+  <RelatorioTreino />
   <Modal
         open={open}
         onClose={handleClose}
