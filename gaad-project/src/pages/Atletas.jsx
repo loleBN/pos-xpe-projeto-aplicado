@@ -33,6 +33,15 @@ const atletas = [
     modalidade: 'Barebow',
     categoria: 'Feminino Adulto (30m)',
     imagem: avatar02
+  },  
+  {
+    nome: 'Julia Barros',
+    idade: 20,
+    altura: 1.57,
+    peso: 53,
+    modalidade: 'Barebow',
+    categoria: 'Feminino Adulto (30m)',
+    imagem: avatar02
   },
 ];
 

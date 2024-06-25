@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
@@ -9,9 +9,13 @@ import Collapse from '@mui/material/Collapse';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import { red } from '@mui/material/colors';
+import { Button } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import AssessmentIcon from '@mui/icons-material/Assessment';
+import Box from '@mui/material/Box';
+import { Modal } from '@mui/material';
+import ChartTreino from './Chart';
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -30,23 +34,13 @@ const  AtletaCard = ({atleta}) => {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   return (
     <Card sx={{ maxWidth: 400, width: 300 }}>
-      {/* <CardHeader
-        avatar={
-          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-            R
-          </Avatar>
-        }
-        action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
-        }
-        title={atleta.nome}
-        subheader={atleta.modalidade}
-      /> */}
       <CardMedia
         component="img"
         height="240"
@@ -74,30 +68,38 @@ const  AtletaCard = ({atleta}) => {
         </Typography>
      </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
+        <IconButton aria-label="edit info">
           <EditIcon />
         </IconButton>
-        <ExpandMore
-          expand={expanded}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-          <ExpandMoreIcon />
-        </ExpandMore>
+        <IconButton aria-label="view point details">
+          <AssessmentIcon onClick={handleOpen}/>
+        </IconButton>
+
       </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-          <Typography paragraph>
-            Descrição do treinos
-          </Typography>
-          <Typography paragraph>
-            Resumo dos scores
-          </Typography>
-        </CardContent>
-      </Collapse>
+      <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+           >
+            <Box sx={modalStyle}>
+            <ChartTreino />
+            </Box>
+          </Modal>
     </Card>
   );
 }
 
 export default  AtletaCard;
+
+const modalStyle = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
